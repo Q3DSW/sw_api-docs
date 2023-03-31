@@ -1,0 +1,3611 @@
+{
+    "openapi": "3.0.0",
+    "paths": {
+        "/health": {
+            "get": {
+                "operationId": "HealthController_getHealth",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Use this to quickly check availability of the app. Returns \"OK\"."
+                    }
+                },
+                "tags": [
+                    "health"
+                ]
+            }
+        },
+        "/version": {
+            "get": {
+                "operationId": "VersionController_getVersion",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Current software version of the backend and connected firmware."
+                    }
+                },
+                "tags": [
+                    "version"
+                ]
+            }
+        },
+        "/firmware-device": {
+            "get": {
+                "operationId": "FirmwareDeviceController_loadFirmwareDevices",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "firmware-device"
+                ]
+            }
+        },
+        "/bootloader-device": {
+            "get": {
+                "operationId": "BootloaderDeviceController_loadBootloaderDevices",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "bootloader-device"
+                ]
+            }
+        },
+        "/bootloader-device/flash": {
+            "post": {
+                "operationId": "BootloaderDeviceController_flashFirmware",
+                "parameters": [],
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "bootloader-device"
+                ]
+            }
+        },
+        "/short-detection/clear-short": {
+            "post": {
+                "operationId": "ShortDetectionController_clearShort",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ClearShortErrorDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "short-detection"
+                ]
+            }
+        },
+        "/analysis": {
+            "get": {
+                "operationId": "AnalysisController_loadPrintHeadAnalysisActivations",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "analysis"
+                ]
+            }
+        },
+        "/analysis/{deviceId}": {
+            "post": {
+                "operationId": "AnalysisController_performAnalysis",
+                "parameters": [
+                    {
+                        "name": "deviceId",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "boolean"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "analysis"
+                ]
+            }
+        },
+        "/print-bed": {
+            "get": {
+                "operationId": "PrintBedController_loadPrintBeds",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/PrintBed"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "print-bed"
+                ]
+            },
+            "post": {
+                "operationId": "PrintBedController_createPrintBed",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreatePrintBedDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "print-bed"
+                ]
+            }
+        },
+        "/print-bed/{id}/select": {
+            "post": {
+                "operationId": "PrintBedController_selectPrintBed",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "print-bed"
+                ]
+            }
+        },
+        "/print-bed/{id}": {
+            "delete": {
+                "operationId": "PrintBedController_deletePrintBed",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "print-bed"
+                ]
+            }
+        },
+        "/print-head-heater": {
+            "get": {
+                "operationId": "PrintHeadHeaterController_loadPrintHeadHeaters",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "print-head-heater"
+                ]
+            }
+        },
+        "/print-head-heater/{deviceId}/activate": {
+            "post": {
+                "operationId": "PrintHeadHeaterController_activatePrintHeadHeater",
+                "parameters": [
+                    {
+                        "name": "deviceId",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "print-head-heater"
+                ]
+            }
+        },
+        "/print-head-heater/{deviceId}/deactivate": {
+            "post": {
+                "operationId": "PrintHeadHeaterController_deactivatePrintHeadHeater",
+                "parameters": [
+                    {
+                        "name": "deviceId",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "print-head-heater"
+                ]
+            }
+        },
+        "/print-head-heater-voltage": {
+            "get": {
+                "operationId": "PrintHeadHeaterVoltageController_loadPrintHeadVoltages",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ResponseHeaterVoltageDto"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "print-head-heater-voltage"
+                ]
+            }
+        },
+        "/print-head-heater-voltage/{id}": {
+            "put": {
+                "operationId": "PrintHeadHeaterVoltageController_updatePrintHeadVoltage",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateHeaterVoltageDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseHeaterVoltageDto"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "print-head-heater-voltage"
+                ]
+            }
+        },
+        "/printer-profile": {
+            "get": {
+                "operationId": "PrinterProfileController_loadPrinterProfile",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "printer-profile"
+                ]
+            }
+        },
+        "/material-removal-pump": {
+            "get": {
+                "operationId": "MaterialRemovalController_loadMaterialRemovalPumps",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ResponsePwmPumpDto"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "material-removal-pump"
+                ]
+            }
+        },
+        "/material-removal-pump/{deviceId}/activate": {
+            "put": {
+                "operationId": "MaterialRemovalController_activateMaterialRemovalPump",
+                "parameters": [
+                    {
+                        "name": "deviceId",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "material-removal-pump"
+                ]
+            }
+        },
+        "/material-removal-pump/{deviceId}/deactivate": {
+            "put": {
+                "operationId": "MaterialRemovalController_deactivateMaterialRemovalPump",
+                "parameters": [
+                    {
+                        "name": "deviceId",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "material-removal-pump"
+                ]
+            }
+        },
+        "/material-removal-pump/{id}": {
+            "put": {
+                "operationId": "MaterialRemovalController_updateMaterialRemovalPump",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdatePwmPumpDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PwmPumpSetting"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "material-removal-pump"
+                ]
+            }
+        },
+        "/material-pump": {
+            "get": {
+                "operationId": "MaterialPumpController_loadMaterialPumps",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ResponseMaterialPumpDto"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "material-pump"
+                ]
+            }
+        },
+        "/material-pump/{deviceId}/activate": {
+            "post": {
+                "operationId": "MaterialPumpController_activateMaterialPump",
+                "parameters": [
+                    {
+                        "name": "deviceId",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseMaterialPumpDto"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "material-pump"
+                ]
+            }
+        },
+        "/material-pump/{deviceId}/deactivate": {
+            "post": {
+                "operationId": "MaterialPumpController_deactivateMaterialPump",
+                "parameters": [
+                    {
+                        "name": "deviceId",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseMaterialPumpDto"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "material-pump"
+                ]
+            }
+        },
+        "/material-pump/{id}/pump-interval": {
+            "put": {
+                "operationId": "MaterialPumpController_updateMaterialPumpInterval",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdatePumpIntervalDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MaterialPumpSetting"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "material-pump"
+                ]
+            }
+        },
+        "/inner-vacuum-pump": {
+            "get": {
+                "operationId": "InnerVacuumPumpController_loadInnerVacuumPumps",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ResponsePwmPumpDto"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "inner-vacuum-pump"
+                ]
+            }
+        },
+        "/inner-vacuum-pump/{deviceId}/activate": {
+            "put": {
+                "operationId": "InnerVacuumPumpController_activateInnerVacuumPump",
+                "parameters": [
+                    {
+                        "name": "deviceId",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "inner-vacuum-pump"
+                ]
+            }
+        },
+        "/inner-vacuum-pump/{deviceId}/deactivate": {
+            "put": {
+                "operationId": "InnerVacuumPumpController_deactivateInnerVacuumPump",
+                "parameters": [
+                    {
+                        "name": "deviceId",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "inner-vacuum-pump"
+                ]
+            }
+        },
+        "/inner-vacuum-pump/{id}": {
+            "put": {
+                "operationId": "InnerVacuumPumpController_updateInnerVacuumPump",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdatePwmPumpDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PwmPumpSetting"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "inner-vacuum-pump"
+                ]
+            }
+        },
+        "/axes": {
+            "get": {
+                "operationId": "AxisController_loadAxes",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "axes"
+                ]
+            }
+        },
+        "/axes/home": {
+            "post": {
+                "operationId": "AxisController_homeAxes",
+                "parameters": [],
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "axes"
+                ]
+            }
+        },
+        "/axes/center": {
+            "post": {
+                "operationId": "AxisController_centerPrintBed",
+                "parameters": [],
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "axes"
+                ]
+            }
+        },
+        "/axes/move": {
+            "post": {
+                "operationId": "AxisController_moveAxis",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/MoveAxisDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "axes"
+                ]
+            }
+        },
+        "/axes/config": {
+            "get": {
+                "operationId": "AxisController_loadAxesConfig",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseAxesConfigDto"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "axes"
+                ]
+            },
+            "put": {
+                "operationId": "AxisController_updateAxesConfig",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateAxesConfigDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseAxesConfigDto"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "axes"
+                ]
+            }
+        },
+        "/uv-light": {
+            "get": {
+                "operationId": "UvLightController_loadUvLights",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ResponseUvLightDto"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "uv-light"
+                ]
+            }
+        },
+        "/uv-light/activate": {
+            "post": {
+                "operationId": "UvLightController_activateUvLights",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ActivateUvLightDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "uv-light"
+                ]
+            }
+        },
+        "/uv-light/deactivate": {
+            "post": {
+                "operationId": "UvLightController_deactivateUvLights",
+                "parameters": [],
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "uv-light"
+                ]
+            }
+        },
+        "/uv-light/{id}": {
+            "put": {
+                "operationId": "UvLightController_updateUvLight",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateUvLightDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "uv-light"
+                ]
+            }
+        },
+        "/print-head-temperature": {
+            "get": {
+                "operationId": "PrintHeadTemperatureController_loadPrintHeadTemperatures",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "print-head-temperature"
+                ]
+            }
+        },
+        "/print-head-temperature/{id}": {
+            "put": {
+                "operationId": "PrintHeadTemperatureController_updatePrintHeadTemperatures",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateTemperatureSettingDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "print-head-temperature"
+                ]
+            }
+        },
+        "/print-head-profiles": {
+            "get": {
+                "operationId": "PrintHeadProfileController_loadPrintHeadProfiles",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ResponsePrintHeadProfileDto"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "print-head-profiles"
+                ]
+            }
+        },
+        "/print-head-profiles/{id}/select": {
+            "post": {
+                "operationId": "PrintHeadProfileController_selectPrintHeadProfile",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponsePrintHeadProfileDto"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "print-head-profiles"
+                ]
+            }
+        },
+        "/slots": {
+            "get": {
+                "operationId": "SlotController_loadSlots",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "slots"
+                ]
+            }
+        },
+        "/slots/{position}/power-on": {
+            "post": {
+                "operationId": "SlotController_turnPowerOn",
+                "parameters": [
+                    {
+                        "name": "position",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "slots"
+                ]
+            }
+        },
+        "/slots/{position}/power-off": {
+            "post": {
+                "operationId": "SlotController_turnPowerOff",
+                "parameters": [
+                    {
+                        "name": "position",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "slots"
+                ]
+            }
+        },
+        "/static-test-mode": {
+            "get": {
+                "operationId": "StaticTestModeController_loadTestModes",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "static-test-mode"
+                ]
+            }
+        },
+        "/static-test-mode/{deviceId}/start": {
+            "post": {
+                "operationId": "StaticTestModeController_startTestMode",
+                "parameters": [
+                    {
+                        "name": "deviceId",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StartStaticTestModeDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "static-test-mode"
+                ]
+            }
+        },
+        "/static-test-mode/{deviceId}/stop": {
+            "post": {
+                "operationId": "StaticTestModeController_stopTestMode",
+                "parameters": [
+                    {
+                        "name": "deviceId",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "static-test-mode"
+                ]
+            }
+        },
+        "/static-test-mode-frequency-steps": {
+            "get": {
+                "operationId": "StaticTestModeFrequencyStepsController_getStep",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "static-test-mode-frequency-steps"
+                ]
+            }
+        },
+        "/static-test-mode-frequency-steps/{deviceId}/start": {
+            "post": {
+                "operationId": "StaticTestModeFrequencyStepsController_startTestMode",
+                "parameters": [
+                    {
+                        "name": "deviceId",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StartStaticTestModeFrequencyStepsDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "static-test-mode-frequency-steps"
+                ]
+            }
+        },
+        "/static-test-mode-frequency-steps/{deviceId}/stop": {
+            "post": {
+                "operationId": "StaticTestModeFrequencyStepsController_stopTestMode",
+                "parameters": [
+                    {
+                        "name": "deviceId",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "static-test-mode-frequency-steps"
+                ]
+            }
+        },
+        "/test-mode-setting": {
+            "get": {
+                "operationId": "TestModeSettingController_loadTestModes",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ResponseTestModeSettingDto"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "test-mode-setting"
+                ]
+            }
+        },
+        "/test-mode-setting/{id}": {
+            "put": {
+                "operationId": "TestModeSettingController_updateTestMode",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateTestModeSettingsDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseTestModeSettingDto"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "test-mode-setting"
+                ]
+            }
+        },
+        "/print-head-test-mode-setting": {
+            "get": {
+                "operationId": "PrintHeadTestModeSettingController_loadTestModes",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ResponsePrintHeadTestModeSettingDto"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "print-head-test-mode-setting"
+                ]
+            }
+        },
+        "/print-head-test-mode-setting/{id}": {
+            "put": {
+                "operationId": "PrintHeadTestModeSettingController_updateTestMode",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdatePrintHeadTestModeSettingsDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponsePrintHeadTestModeSettingDto"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "print-head-test-mode-setting"
+                ]
+            }
+        },
+        "/line-test-mode": {
+            "get": {
+                "operationId": "LineTestModeController_loadTestModes",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "line-test-mode"
+                ]
+            }
+        },
+        "/line-test-mode/{id}": {
+            "put": {
+                "operationId": "LineTestModeController_updateTestMode",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateLineTestSettingDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "line-test-mode"
+                ]
+            }
+        },
+        "/stage-test-mode": {
+            "get": {
+                "operationId": "StageTestModeController_loadTestModes",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "stage-test-mode"
+                ]
+            },
+            "put": {
+                "operationId": "StageTestModeController_updateTestMode",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateStageTestModeSettingsDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/StageTestSetting"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "stage-test-mode"
+                ]
+            }
+        },
+        "/stage-test-mode/{deviceId}/start": {
+            "post": {
+                "operationId": "StageTestModeController_startTestMode",
+                "parameters": [
+                    {
+                        "name": "deviceId",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "stage-test-mode"
+                ]
+            }
+        },
+        "/stage-test-mode/{deviceId}/stop": {
+            "post": {
+                "operationId": "StageTestModeController_stopTestMode",
+                "parameters": [
+                    {
+                        "name": "deviceId",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "stage-test-mode"
+                ]
+            }
+        },
+        "/static-test-mode-pulse-length-steps": {
+            "get": {
+                "operationId": "StaticTestModePulseLengthStepsController_getStep",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "static-test-mode-pulse-length-steps"
+                ]
+            }
+        },
+        "/static-test-mode-pulse-length-steps/{deviceId}/start": {
+            "post": {
+                "operationId": "StaticTestModePulseLengthStepsController_startTestMode",
+                "parameters": [
+                    {
+                        "name": "deviceId",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StartStaticTestModePulseLengthStepsDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "static-test-mode-pulse-length-steps"
+                ]
+            }
+        },
+        "/static-test-mode-pulse-length-steps/{deviceId}/stop": {
+            "post": {
+                "operationId": "StaticTestModePulseLengthStepsController_stopTestMode",
+                "parameters": [
+                    {
+                        "name": "deviceId",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "static-test-mode-pulse-length-steps"
+                ]
+            }
+        },
+        "/notion-report/notion-connection": {
+            "get": {
+                "operationId": "NotionReportController_checkNotionConnection",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "notion-report"
+                ]
+            }
+        },
+        "/notion-report": {
+            "post": {
+                "operationId": "NotionReportController_uploadPrintNotionReport",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UploadNotionReportDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "notion-report"
+                ]
+            }
+        },
+        "/print-plan": {
+            "get": {
+                "operationId": "PrintPlanController_loadAll",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "print-plan"
+                ]
+            }
+        },
+        "/print-plan/{id}": {
+            "get": {
+                "operationId": "PrintPlanController_loadOne",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "print-plan"
+                ]
+            },
+            "delete": {
+                "operationId": "PrintPlanController_delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "print-plan"
+                ]
+            }
+        },
+        "/print-plan/{id}/preview": {
+            "get": {
+                "operationId": "PrintPlanController_loadPreview",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "print-plan"
+                ]
+            }
+        },
+        "/print-plan/{id}/download": {
+            "get": {
+                "operationId": "PrintPlanController_download",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "print-plan"
+                ]
+            }
+        },
+        "/print/active": {
+            "get": {
+                "operationId": "PrintController_loadActivePrint",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponsePrintDto"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "print"
+                ]
+            }
+        },
+        "/print": {
+            "get": {
+                "operationId": "PrintController_loadPrints",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ResponsePrintDto"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "print"
+                ]
+            }
+        },
+        "/print/{id}": {
+            "get": {
+                "operationId": "PrintController_loadPrint",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponsePrintDto"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "print"
+                ]
+            },
+            "patch": {
+                "operationId": "PrintController_updatePrint",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdatePrintDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponsePrintDto"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "print"
+                ]
+            }
+        },
+        "/print/start": {
+            "post": {
+                "operationId": "PrintController_startPrint",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StartPrintDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponsePrintDto"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "print"
+                ]
+            }
+        },
+        "/print/stop": {
+            "post": {
+                "operationId": "PrintController_stopPrint",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StopPrintDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "print"
+                ]
+            }
+        },
+        "/print/continue": {
+            "post": {
+                "operationId": "PrintController_continuePrint",
+                "parameters": [],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponsePrintDto"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "print"
+                ]
+            }
+        },
+        "/print/clear": {
+            "post": {
+                "operationId": "PrintController_clearPrint",
+                "parameters": [],
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "print"
+                ]
+            }
+        },
+        "/sliced-jobs": {
+            "get": {
+                "operationId": "SlicedJobsController_loadAll",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "sliced-jobs"
+                ]
+            }
+        },
+        "/sliced-jobs/{id}": {
+            "get": {
+                "operationId": "SlicedJobsController_loadOne",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SlicedJob"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "sliced-jobs"
+                ]
+            },
+            "delete": {
+                "operationId": "SlicedJobsController_delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "sliced-jobs"
+                ]
+            }
+        },
+        "/sliced-jobs/{id}/preview": {
+            "get": {
+                "operationId": "SlicedJobsController_loadPreview",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "sliced-jobs"
+                ]
+            }
+        },
+        "/sliced-jobs/{id}/download": {
+            "get": {
+                "operationId": "SlicedJobsController_download",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "sliced-jobs"
+                ]
+            }
+        },
+        "/print-job-upload": {
+            "post": {
+                "operationId": "PrintJobUploadController_upload",
+                "parameters": [],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "print-job-upload"
+                ]
+            }
+        },
+        "/printer-setting": {
+            "get": {
+                "operationId": "PrinterSettingController_loadActivePrinterSettings",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PrinterSetting"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "printer-setting"
+                ]
+            },
+            "patch": {
+                "operationId": "PrinterSettingController_updatePrinterSettings",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdatePrinterSettingDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PrinterSetting"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "printer-setting"
+                ]
+            }
+        },
+        "/heater-shutoff-period": {
+            "put": {
+                "operationId": "HeaterShutoffPeriodController_updateHeaterShutoffPeriod",
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateHeaterShutoffPeriodDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "heater-shutoff-period"
+                ]
+            }
+        },
+        "/sweep-offsets": {
+            "get": {
+                "operationId": "SweepOffsetController_loadPrintHeadOffsets",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "sweep-offsets"
+                ]
+            }
+        },
+        "/sweep-offsets/{id}": {
+            "put": {
+                "operationId": "SweepOffsetController_updatePrintHeadOffset",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdatePrintHeadOffsetDto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SweepOffset"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "sweep-offsets"
+                ]
+            }
+        },
+        "/disk-space": {
+            "get": {
+                "operationId": "DiskSpaceController_loadDiskSpace",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseDiskSpaceDto"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "disk-space"
+                ]
+            }
+        },
+        "/balena-device": {
+            "get": {
+                "operationId": "BalenaDeviceController_loadBalenaDevice",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "balena-device"
+                ]
+            }
+        },
+        "/ip-address": {
+            "get": {
+                "operationId": "IpAddressController_loadIpAddress",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "ip-address"
+                ]
+            }
+        }
+    },
+    "info": {
+        "title": "Printer backend API",
+        "description": "",
+        "version": "0.0.1",
+        "contact": {}
+    },
+    "tags": [],
+    "servers": [],
+    "components": {
+        "schemas": {
+            "ClearShortErrorDto": {
+                "type": "object",
+                "properties": {
+                    "deviceId": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "deviceId"
+                ]
+            },
+            "PrintBed": {
+                "type": "object",
+                "properties": {
+                    "sizeMicrometerX": {
+                        "type": "number"
+                    },
+                    "sizeMicrometerY": {
+                        "type": "number"
+                    },
+                    "startMicrometerX": {
+                        "type": "number"
+                    },
+                    "startMicrometerY": {
+                        "type": "number"
+                    },
+                    "id": {
+                        "type": "number"
+                    },
+                    "createdAt": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "updatedAt": {
+                        "format": "date-time",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "sizeMicrometerX",
+                    "sizeMicrometerY",
+                    "startMicrometerX",
+                    "startMicrometerY",
+                    "id",
+                    "createdAt",
+                    "updatedAt"
+                ]
+            },
+            "CreatePrintBedDto": {
+                "type": "object",
+                "properties": {
+                    "sizeMicrometerX": {
+                        "type": "number"
+                    },
+                    "sizeMicrometerY": {
+                        "type": "number"
+                    },
+                    "startMicrometerX": {
+                        "type": "number"
+                    },
+                    "startMicrometerY": {
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "sizeMicrometerX",
+                    "sizeMicrometerY",
+                    "startMicrometerX",
+                    "startMicrometerY"
+                ]
+            },
+            "ResponseHeaterVoltageDto": {
+                "type": "object",
+                "properties": {
+                    "deviceId": {
+                        "type": "string",
+                        "description": "Device id."
+                    },
+                    "id": {
+                        "type": "number",
+                        "description": "Print head id."
+                    },
+                    "voltage": {
+                        "type": "number",
+                        "description": "Voltage of the print head heater."
+                    }
+                },
+                "required": [
+                    "deviceId",
+                    "id",
+                    "voltage"
+                ]
+            },
+            "UpdateHeaterVoltageDto": {
+                "type": "object",
+                "properties": {
+                    "voltage": {
+                        "type": "number",
+                        "description": "Update heater voltage of a print head."
+                    }
+                },
+                "required": [
+                    "voltage"
+                ]
+            },
+            "ResponsePwmPumpDto": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number",
+                        "description": "Id for the pump setting"
+                    },
+                    "deviceId": {
+                        "type": "string",
+                        "description": "Connected device id for the pump"
+                    },
+                    "isActive": {
+                        "type": "boolean",
+                        "description": "State of the pump activation."
+                    },
+                    "pwmPercentage": {
+                        "type": "number",
+                        "description": "Pulse modulation width percentage of the pump"
+                    }
+                },
+                "required": [
+                    "id",
+                    "deviceId",
+                    "isActive",
+                    "pwmPercentage"
+                ]
+            },
+            "UpdatePwmPumpDto": {
+                "type": "object",
+                "properties": {
+                    "pwmPercentage": {
+                        "type": "number",
+                        "description": "Sets the pulse modulation width percentage of the pump"
+                    }
+                },
+                "required": [
+                    "pwmPercentage"
+                ]
+            },
+            "PwmPumpSetting": {
+                "type": "object",
+                "properties": {}
+            },
+            "ResponseMaterialPumpDto": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number",
+                        "description": "Id for the pump setting"
+                    },
+                    "deviceId": {
+                        "type": "string",
+                        "description": "Connected device id for the pump"
+                    },
+                    "isActive": {
+                        "type": "boolean",
+                        "description": "State of the pump activation."
+                    },
+                    "intervalDurationMilliseconds": {
+                        "type": "number",
+                        "description": "Pump interval duration"
+                    },
+                    "intervalFrequencyVoxel": {
+                        "type": "number",
+                        "description": "Number of voxel ejection that trigger pumping"
+                    },
+                    "isAutomaticPumpingEnabled": {
+                        "type": "boolean",
+                        "description": "State of the pump automation."
+                    }
+                },
+                "required": [
+                    "id",
+                    "deviceId",
+                    "isActive",
+                    "intervalDurationMilliseconds",
+                    "intervalFrequencyVoxel",
+                    "isAutomaticPumpingEnabled"
+                ]
+            },
+            "UpdatePumpIntervalDto": {
+                "type": "object",
+                "properties": {
+                    "isAutomaticPumpingEnabled": {
+                        "type": "boolean",
+                        "description": "Flag for enabling automatic pumping"
+                    },
+                    "intervalDurationMilliseconds": {
+                        "type": "number",
+                        "description": "Pumping duration in seconds for pump interval"
+                    },
+                    "intervalFrequencyVoxel": {
+                        "type": "number",
+                        "description": "Pump interval time in voxel"
+                    }
+                },
+                "required": [
+                    "isAutomaticPumpingEnabled",
+                    "intervalDurationMilliseconds",
+                    "intervalFrequencyVoxel"
+                ]
+            },
+            "MaterialPumpSetting": {
+                "type": "object",
+                "properties": {
+                    "deviceId": {
+                        "type": "string"
+                    },
+                    "isAutomaticPumpingEnabled": {
+                        "type": "boolean"
+                    },
+                    "intervalDurationMilliseconds": {
+                        "type": "number"
+                    },
+                    "intervalFrequencyVoxel": {
+                        "type": "number"
+                    },
+                    "id": {
+                        "type": "number"
+                    },
+                    "createdAt": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "updatedAt": {
+                        "format": "date-time",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "deviceId",
+                    "isAutomaticPumpingEnabled",
+                    "intervalDurationMilliseconds",
+                    "intervalFrequencyVoxel",
+                    "id",
+                    "createdAt",
+                    "updatedAt"
+                ]
+            },
+            "MoveAxisDto": {
+                "type": "object",
+                "properties": {
+                    "positionMicrometer": {
+                        "type": "number",
+                        "description": "Position in micrometer"
+                    },
+                    "axis": {
+                        "enum": [
+                            "X",
+                            "Y",
+                            "Z"
+                        ],
+                        "type": "string",
+                        "description": "Axis that should be moved"
+                    }
+                },
+                "required": [
+                    "positionMicrometer",
+                    "axis"
+                ]
+            },
+            "ResponseAxesConfigDto": {
+                "type": "object",
+                "properties": {
+                    "firmwareZMaxPositionMicrometer": {
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "firmwareZMaxPositionMicrometer"
+                ]
+            },
+            "UpdateAxesConfigDto": {
+                "type": "object",
+                "properties": {
+                    "firmwareZMaxPositionMicrometer": {
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "firmwareZMaxPositionMicrometer"
+                ]
+            },
+            "ResponseUvLightDto": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number",
+                        "description": "Id for the uv config"
+                    },
+                    "deviceId": {
+                        "type": "string",
+                        "description": "The uv modules device id."
+                    },
+                    "isActive": {
+                        "type": "boolean",
+                        "description": "The uv light activation state"
+                    },
+                    "shiftMicrometer": {
+                        "type": "number",
+                        "description": "The uv lights shift in micrometer"
+                    },
+                    "spreadMicrometer": {
+                        "type": "number",
+                        "description": "The uv lights spread in micrometer"
+                    }
+                },
+                "required": [
+                    "id",
+                    "deviceId",
+                    "isActive",
+                    "shiftMicrometer",
+                    "spreadMicrometer"
+                ]
+            },
+            "CuringChannelConfigDto": {
+                "type": "object",
+                "properties": {
+                    "highCurrent": {
+                        "type": "boolean"
+                    },
+                    "dutyCycle": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 100
+                    }
+                },
+                "required": [
+                    "highCurrent",
+                    "dutyCycle"
+                ]
+            },
+            "CuringLaydownConfigDto": {
+                "type": "object",
+                "properties": {
+                    "channel0": {
+                        "$ref": "#/components/schemas/CuringChannelConfigDto"
+                    },
+                    "channel1": {
+                        "$ref": "#/components/schemas/CuringChannelConfigDto"
+                    }
+                },
+                "required": [
+                    "channel0",
+                    "channel1"
+                ]
+            },
+            "ActivateUvLightDto": {
+                "type": "object",
+                "properties": {
+                    "preLaydown": {
+                        "$ref": "#/components/schemas/CuringLaydownConfigDto"
+                    },
+                    "postLaydown": {
+                        "$ref": "#/components/schemas/CuringLaydownConfigDto"
+                    }
+                },
+                "required": [
+                    "preLaydown",
+                    "postLaydown"
+                ]
+            },
+            "UpdateUvLightDto": {
+                "type": "object",
+                "properties": {
+                    "shiftMicrometer": {
+                        "type": "number"
+                    },
+                    "spreadMicrometer": {
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "shiftMicrometer",
+                    "spreadMicrometer"
+                ]
+            },
+            "UpdateTemperatureSettingDto": {
+                "type": "object",
+                "properties": {
+                    "temperatureC": {
+                        "type": "number",
+                        "description": "Target temperature of the print head in celsius"
+                    }
+                },
+                "required": [
+                    "temperatureC"
+                ]
+            },
+            "ResponsePrintHeadProfileDto": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number"
+                    },
+                    "type": {
+                        "enum": [
+                            "VOXLER24B",
+                            "VOXLER48"
+                        ],
+                        "type": "string"
+                    },
+                    "nozzleDistanceMicrometer": {
+                        "type": "number"
+                    },
+                    "numberOfNozzles": {
+                        "type": "number"
+                    },
+                    "isSelected": {
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "id",
+                    "type",
+                    "nozzleDistanceMicrometer",
+                    "numberOfNozzles",
+                    "isSelected"
+                ]
+            },
+            "StartStaticTestModeDto": {
+                "type": "object",
+                "properties": {
+                    "trigger": {
+                        "type": "object"
+                    },
+                    "ejection": {
+                        "type": "string",
+                        "enum": [
+                            "BURST",
+                            "CONTINUOUS"
+                        ]
+                    }
+                },
+                "required": [
+                    "trigger",
+                    "ejection"
+                ]
+            },
+            "StartStaticTestModeFrequencyStepsDto": {
+                "type": "object",
+                "properties": {
+                    "numberOfSteps": {
+                        "type": "number"
+                    },
+                    "burstsPerStep": {
+                        "type": "number"
+                    },
+                    "startFrequencyHz": {
+                        "type": "number"
+                    },
+                    "frequencyIntervalHz": {
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "numberOfSteps",
+                    "burstsPerStep",
+                    "startFrequencyHz",
+                    "frequencyIntervalHz"
+                ]
+            },
+            "ResponseTestModeSettingDto": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number"
+                    },
+                    "shootingFrequencyHz": {
+                        "type": "number"
+                    },
+                    "preCuring": {
+                        "type": "object"
+                    },
+                    "postCuring": {
+                        "type": "object"
+                    },
+                    "planarizerSpeedRpm": {
+                        "type": "number"
+                    },
+                    "numberOfSteps": {
+                        "type": "number"
+                    },
+                    "burstsPerStep": {
+                        "type": "number"
+                    },
+                    "pulseLengthIntervalMicroseconds": {
+                        "type": "number"
+                    },
+                    "frequencyIntervalHz": {
+                        "type": "number"
+                    },
+                    "startPulseLengthMicroseconds": {
+                        "type": "number"
+                    },
+                    "startFrequencyHz": {
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "id",
+                    "shootingFrequencyHz",
+                    "preCuring",
+                    "postCuring",
+                    "planarizerSpeedRpm",
+                    "numberOfSteps",
+                    "burstsPerStep",
+                    "pulseLengthIntervalMicroseconds",
+                    "frequencyIntervalHz",
+                    "startPulseLengthMicroseconds",
+                    "startFrequencyHz"
+                ]
+            },
+            "UpdateTestModeSettingsDto": {
+                "type": "object",
+                "properties": {
+                    "shootingFrequencyHz": {
+                        "type": "number",
+                        "description": "The shooting Frequency of the print"
+                    },
+                    "preCuring": {
+                        "description": "The pre-curing uv light settings",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/CuringLaydownConfigDto"
+                            }
+                        ]
+                    },
+                    "postCuring": {
+                        "description": "The post-curing uv light settings",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/CuringLaydownConfigDto"
+                            }
+                        ]
+                    },
+                    "planarizerSpeedRpm": {
+                        "type": "number",
+                        "description": "The planarizer speed in rounds per minute"
+                    },
+                    "numberOfSteps": {
+                        "type": "number",
+                        "description": "The number of steps for the step modes"
+                    },
+                    "burstsPerStep": {
+                        "type": "number",
+                        "description": "The number of bursts per step for the step modes"
+                    },
+                    "startFrequencyHz": {
+                        "type": "number",
+                        "description": "The start frequency for the frequency step mode"
+                    },
+                    "frequencyIntervalHz": {
+                        "type": "number",
+                        "description": "The frequency interval for the frequency step mode"
+                    },
+                    "startPulseLengthMicroseconds": {
+                        "type": "number",
+                        "description": "The start pulse length for the pulse length step mode"
+                    },
+                    "pulseLengthIntervalMicroseconds": {
+                        "type": "number",
+                        "description": "The pulse length interval for the pulse length step mode"
+                    }
+                },
+                "required": [
+                    "shootingFrequencyHz",
+                    "preCuring",
+                    "postCuring",
+                    "planarizerSpeedRpm",
+                    "numberOfSteps",
+                    "burstsPerStep",
+                    "startFrequencyHz",
+                    "frequencyIntervalHz",
+                    "startPulseLengthMicroseconds",
+                    "pulseLengthIntervalMicroseconds"
+                ]
+            },
+            "ResponsePrintHeadTestModeSettingDto": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number"
+                    },
+                    "deviceId": {
+                        "type": "string"
+                    },
+                    "nozzleActivations": {
+                        "type": "array",
+                        "items": {
+                            "type": "boolean"
+                        }
+                    },
+                    "voltage": {
+                        "type": "number"
+                    },
+                    "pulseLengthMicroSeconds": {
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "id",
+                    "deviceId",
+                    "nozzleActivations",
+                    "voltage",
+                    "pulseLengthMicroSeconds"
+                ]
+            },
+            "UpdatePrintHeadTestModeSettingsDto": {
+                "type": "object",
+                "properties": {
+                    "nozzleActivations": {
+                        "type": "boolean",
+                        "description": "Activation of each nozzle shooting"
+                    },
+                    "pulseLengthMicroSeconds": {
+                        "type": "number",
+                        "description": "Pulse length in micro seconds of print head test mode"
+                    },
+                    "voltage": {
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "nozzleActivations",
+                    "pulseLengthMicroSeconds",
+                    "voltage"
+                ]
+            },
+            "UpdateLineTestSettingDto": {
+                "type": "object",
+                "properties": {
+                    "numberOfColumns": {
+                        "type": "number"
+                    },
+                    "columnWidthMicrometer": {
+                        "type": "number"
+                    },
+                    "columnGapMicrometer": {
+                        "type": "number"
+                    },
+                    "voxelSizeXMicrometer": {
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "numberOfColumns",
+                    "columnWidthMicrometer",
+                    "columnGapMicrometer",
+                    "voxelSizeXMicrometer"
+                ]
+            },
+            "UpdateStageTestModeSettingsDto": {
+                "type": "object",
+                "properties": {
+                    "voxelSizeMicrometerX": {
+                        "type": "number",
+                        "minimum": 15,
+                        "maximum": 65536
+                    },
+                    "numberOfVoxels": {
+                        "type": "number",
+                        "minimum": 1,
+                        "maximum": 4294967296
+                    }
+                },
+                "required": [
+                    "voxelSizeMicrometerX",
+                    "numberOfVoxels"
+                ]
+            },
+            "StageTestSetting": {
+                "type": "object",
+                "properties": {
+                    "voxelSizeMicrometerX": {
+                        "type": "number"
+                    },
+                    "numberOfVoxels": {
+                        "type": "number"
+                    },
+                    "id": {
+                        "type": "number"
+                    },
+                    "createdAt": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "updatedAt": {
+                        "format": "date-time",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "voxelSizeMicrometerX",
+                    "numberOfVoxels",
+                    "id",
+                    "createdAt",
+                    "updatedAt"
+                ]
+            },
+            "StartStaticTestModePulseLengthStepsDto": {
+                "type": "object",
+                "properties": {
+                    "numberOfSteps": {
+                        "type": "number"
+                    },
+                    "burstsPerStep": {
+                        "type": "number"
+                    },
+                    "startPulseLengthMicroseconds": {
+                        "type": "number"
+                    },
+                    "pulseLengthIntervalMicroseconds": {
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "numberOfSteps",
+                    "burstsPerStep",
+                    "startPulseLengthMicroseconds",
+                    "pulseLengthIntervalMicroseconds"
+                ]
+            },
+            "UploadNotionReportDto": {
+                "type": "object",
+                "properties": {
+                    "printId": {
+                        "type": "number",
+                        "description": "The print id"
+                    }
+                },
+                "required": [
+                    "printId"
+                ]
+            },
+            "ValuePerAxis": {
+                "type": "object",
+                "properties": {}
+            },
+            "ResponsePrintDto": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number"
+                    },
+                    "createdAt": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "updatedAt": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "state": {
+                        "enum": [
+                            "STARTED",
+                            "EXECUTE_SETUP",
+                            "EXECUTE_INSTRUCTIONS",
+                            "EXECUTE_TEARDOWN",
+                            "STOPPED",
+                            "FINISHED",
+                            "FAILED"
+                        ],
+                        "type": "string"
+                    },
+                    "isActive": {
+                        "type": "boolean"
+                    },
+                    "lineIndex": {
+                        "type": "number",
+                        "nullable": true
+                    },
+                    "finishedAt": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "reportUploadUrl": {
+                        "type": "string"
+                    },
+                    "currentLayer": {
+                        "type": "number"
+                    },
+                    "currentSweep": {
+                        "type": "number"
+                    },
+                    "rawPrintTimeMs": {
+                        "type": "number"
+                    },
+                    "positionOffsetMicrometer": {
+                        "$ref": "#/components/schemas/ValuePerAxis"
+                    },
+                    "printPlan": {
+                        "type": "object"
+                    }
+                },
+                "required": [
+                    "id",
+                    "createdAt",
+                    "updatedAt",
+                    "state",
+                    "isActive",
+                    "lineIndex",
+                    "currentLayer",
+                    "currentSweep",
+                    "rawPrintTimeMs",
+                    "positionOffsetMicrometer",
+                    "printPlan"
+                ]
+            },
+            "UpdatePrintDto": {
+                "type": "object",
+                "properties": {
+                    "state": {
+                        "type": "string",
+                        "enum": [
+                            "STARTED",
+                            "EXECUTE_SETUP",
+                            "EXECUTE_INSTRUCTIONS",
+                            "EXECUTE_TEARDOWN",
+                            "STOPPED",
+                            "FINISHED",
+                            "FAILED"
+                        ]
+                    },
+                    "isActive": {
+                        "type": "boolean"
+                    },
+                    "lineIndex": {
+                        "type": "number",
+                        "nullable": true
+                    },
+                    "currentLayer": {
+                        "type": "number"
+                    },
+                    "currentSweep": {
+                        "type": "number"
+                    },
+                    "rawPrintTimeMs": {
+                        "type": "number"
+                    },
+                    "positionOffsetMicrometer": {
+                        "$ref": "#/components/schemas/ValuePerAxis"
+                    }
+                }
+            },
+            "MaterialAssignmentDto": {
+                "type": "object",
+                "properties": {
+                    "deviceId": {
+                        "type": "string"
+                    },
+                    "material": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "deviceId",
+                    "material"
+                ]
+            },
+            "ValuePerAxisXY": {
+                "type": "object",
+                "properties": {}
+            },
+            "StartPrintDto": {
+                "type": "object",
+                "properties": {
+                    "startAtLayer": {
+                        "type": "number",
+                        "description": "Starts the print at a specific layer. \n        The start layer will be printed directly onto the print bed. \n        All z movements in the print plan are moved down by the skipped layer height."
+                    },
+                    "printPlanId": {
+                        "type": "number"
+                    },
+                    "materialAssignments": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/MaterialAssignmentDto"
+                        }
+                    },
+                    "positionOffsetMicrometer": {
+                        "$ref": "#/components/schemas/ValuePerAxisXY"
+                    }
+                },
+                "required": [
+                    "printPlanId",
+                    "materialAssignments"
+                ]
+            },
+            "StopPrintDto": {
+                "type": "object",
+                "properties": {
+                    "completeLayer": {
+                        "type": "boolean"
+                    }
+                }
+            },
+            "SlicedJob": {
+                "type": "object",
+                "properties": {
+                    "originalFileName": {
+                        "type": "string"
+                    },
+                    "filePath": {
+                        "type": "string"
+                    },
+                    "fileSizeByte": {
+                        "type": "number"
+                    },
+                    "fileHash": {
+                        "type": "string"
+                    },
+                    "previewPath": {
+                        "type": "string"
+                    },
+                    "modelPath": {
+                        "type": "string"
+                    },
+                    "numberOfLayers": {
+                        "type": "number"
+                    },
+                    "voxelSizeMicrometerX": {
+                        "type": "number"
+                    },
+                    "voxelSizeMicrometerY": {
+                        "type": "number"
+                    },
+                    "voxelSizeMicrometerZ": {
+                        "type": "number"
+                    },
+                    "dimensionMicrometerX": {
+                        "type": "number"
+                    },
+                    "dimensionMicrometerY": {
+                        "type": "number"
+                    },
+                    "dimensionMicrometerZ": {
+                        "type": "number"
+                    },
+                    "supportDilation": {
+                        "type": "number"
+                    },
+                    "supportDilationTop": {
+                        "type": "number"
+                    },
+                    "id": {
+                        "type": "number"
+                    },
+                    "createdAt": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "updatedAt": {
+                        "format": "date-time",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "originalFileName",
+                    "filePath",
+                    "fileSizeByte",
+                    "fileHash",
+                    "previewPath",
+                    "modelPath",
+                    "numberOfLayers",
+                    "voxelSizeMicrometerX",
+                    "voxelSizeMicrometerY",
+                    "voxelSizeMicrometerZ",
+                    "dimensionMicrometerX",
+                    "dimensionMicrometerY",
+                    "dimensionMicrometerZ",
+                    "supportDilation",
+                    "supportDilationTop",
+                    "id",
+                    "createdAt",
+                    "updatedAt"
+                ]
+            },
+            "PrintHeadProfile": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "VOXLER24B",
+                            "VOXLER48"
+                        ]
+                    },
+                    "nozzleDistanceMicrometer": {
+                        "type": "number"
+                    },
+                    "numberOfNozzles": {
+                        "type": "number"
+                    },
+                    "id": {
+                        "type": "number"
+                    },
+                    "createdAt": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "updatedAt": {
+                        "format": "date-time",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "type",
+                    "nozzleDistanceMicrometer",
+                    "numberOfNozzles",
+                    "id",
+                    "createdAt",
+                    "updatedAt"
+                ]
+            },
+            "PrinterSetting": {
+                "type": "object",
+                "properties": {
+                    "printerName": {
+                        "type": "string"
+                    },
+                    "substrateOffsetMicrometer": {
+                        "type": "number"
+                    },
+                    "heaterShutoffPeriodMs": {
+                        "type": "number"
+                    },
+                    "printHeadOffsetMicrometer": {
+                        "type": "number"
+                    },
+                    "selectedPrintHeadProfile": {
+                        "$ref": "#/components/schemas/PrintHeadProfile"
+                    },
+                    "isPlanarizerRotationClockwise": {
+                        "type": "boolean"
+                    },
+                    "selectedPrintBed": {
+                        "$ref": "#/components/schemas/PrintBed"
+                    },
+                    "id": {
+                        "type": "number"
+                    },
+                    "createdAt": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "updatedAt": {
+                        "format": "date-time",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "printerName",
+                    "substrateOffsetMicrometer",
+                    "heaterShutoffPeriodMs",
+                    "printHeadOffsetMicrometer",
+                    "isPlanarizerRotationClockwise",
+                    "id",
+                    "createdAt",
+                    "updatedAt"
+                ]
+            },
+            "UpdatePrinterSettingDto": {
+                "type": "object",
+                "properties": {
+                    "substrateOffsetMicrometer": {
+                        "type": "number"
+                    },
+                    "curingPaddingMicrometer": {
+                        "type": "number"
+                    },
+                    "curingOffsetMicrometer": {
+                        "type": "number"
+                    },
+                    "printerName": {
+                        "type": "string"
+                    },
+                    "printHeadOffsetMicrometer": {
+                        "type": "number"
+                    },
+                    "isPlanarizerRotationClockwise": {
+                        "type": "boolean"
+                    }
+                }
+            },
+            "PrinterIdleSetting": {
+                "type": "object",
+                "properties": {}
+            },
+            "UpdateHeaterShutoffPeriodDto": {
+                "type": "object",
+                "properties": {
+                    "heaterShutoffPeriodMs": {
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "heaterShutoffPeriodMs"
+                ]
+            },
+            "UpdatePrintHeadOffsetDto": {
+                "type": "object",
+                "properties": {
+                    "forwardsMicrometer": {
+                        "type": "number"
+                    },
+                    "backwardsMicrometer": {
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "forwardsMicrometer",
+                    "backwardsMicrometer"
+                ]
+            },
+            "SweepOffset": {
+                "type": "object",
+                "properties": {
+                    "deviceId": {
+                        "type": "string"
+                    },
+                    "forwardsMicrometer": {
+                        "type": "number"
+                    },
+                    "backwardsMicrometer": {
+                        "type": "number"
+                    },
+                    "id": {
+                        "type": "number"
+                    },
+                    "createdAt": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "updatedAt": {
+                        "format": "date-time",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "deviceId",
+                    "forwardsMicrometer",
+                    "backwardsMicrometer",
+                    "id",
+                    "createdAt",
+                    "updatedAt"
+                ]
+            },
+            "ResponseDiskSpaceDto": {
+                "type": "object",
+                "properties": {
+                    "freeBytes": {
+                        "type": "number"
+                    },
+                    "sizeBytes": {
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "freeBytes",
+                    "sizeBytes"
+                ]
+            }
+        }
+    }
+}
